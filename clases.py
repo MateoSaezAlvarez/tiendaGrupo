@@ -14,6 +14,8 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 class Usuario(UserMixin, db.Model):
+    __tablename__ = 'usuario'
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
@@ -25,6 +27,8 @@ class Usuario(UserMixin, db.Model):
         self.roles = roles
 
 class Producto(db.Model):
+    __tablename__ = 'producto'
+    
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
     precio = db.Column(db.Float, nullable=False)
@@ -38,6 +42,8 @@ class Producto(db.Model):
         self.imagen = imagen
 
 class Carrito(db.Model):
+    __tablename__ = 'carrito'
+    
     id = db.Column(db.Integer, primary_key=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
     producto_id = db.Column(db.Integer, db.ForeignKey('producto.id'), nullable=False)
@@ -53,6 +59,8 @@ class Carrito(db.Model):
         self.cantidad = cantidad
 
 class Pedido(db.Model):
+    __tablename__ = 'pedido'
+    
     id = db.Column(db.Integer, primary_key=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
     total = db.Column(db.Float, nullable=False)
@@ -61,9 +69,23 @@ class Pedido(db.Model):
         self.usuario_id = usuario_id
         self.total = total
 
+    detalles_pedido = db.relationship('DetallePedido', backref='pedido')
+
 class DetallePedido(db.Model):
+    __tablename__ = 'detalle_pedido'
+
     id = db.Column(db.Integer, primary_key=True)
     pedido_id = db.Column(db.Integer, db.ForeignKey('pedido.id'), nullable=False)
     producto_id = db.Column(db.Integer, db.ForeignKey('producto.id'), nullable=False)
     cantidad = db.Column(db.Integer, nullable=False)
     precio = db.Column(db.Float, nullable=False)
+    
+    # Relaciones para acceder fácil: detalle_pedido.producto.nombre
+    pedido = db.relationship('Pedido', backref='detalles_pedido')
+    producto = db.relationship('Producto', backref='detalles_pedido')
+
+    def __init__(self, pedido_id, producto_id, cantidad, precio):
+        self.pedido_id = pedido_id
+        self.producto_id = producto_id
+        self.cantidad = cantidad
+        self.precio = precio
