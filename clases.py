@@ -83,31 +83,24 @@ class Carrito(db.Model):
 class Pedido(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
-    carrito_id = db.Column(db.Integer, db.ForeignKey('carrito.id'), nullable=False)
-
-    def __init__(self, usuario_id, carrito_id):
+    fecha = db.Column(db.DateTime, nullable=False)
+    total = db.Column(db.Float, nullable=False)
+    
+    def __init__(self, usuario_id, fecha, total):
         self.usuario_id = usuario_id
-        self.carrito_id = carrito_id
-
-    def get_usuario_id(self):
-        return self.usuario_id
-    
-    def get_carrito_id(self):
-        return self.carrito_id
-    
+        self.fecha = fecha
+        self.total = total
 
 class DetallePedido(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     pedido_id = db.Column(db.Integer, db.ForeignKey('pedido.id'), nullable=False)
     producto_id = db.Column(db.Integer, db.ForeignKey('producto.id'), nullable=False)
     cantidad = db.Column(db.Integer, nullable=False)
-    precio = db.Column(db.Float, nullable=False)
 
-    def __init__(self, pedido_id, producto_id, cantidad, precio):
+    def __init__(self, pedido_id, producto_id, cantidad):
         self.pedido_id = pedido_id
         self.producto_id = producto_id
         self.cantidad = cantidad
-        self.precio = precio
 
     def get_pedido_id(self):
         return self.pedido_id
@@ -117,6 +110,3 @@ class DetallePedido(db.Model):
     
     def get_cantidad(self):
         return self.cantidad
-    
-    def get_precio(self):
-        return self.precio
