@@ -69,7 +69,7 @@ class Pedido(db.Model):
         self.usuario_id = usuario_id
         self.total = total
 
-    detalles_pedido = db.relationship('DetallePedido', backref='pedido')
+    detalles_pedido = db.relationship('DetallePedido', back_populates='pedido')
 
 class DetallePedido(db.Model):
     __tablename__ = 'detalle_pedido'
@@ -81,7 +81,7 @@ class DetallePedido(db.Model):
     precio = db.Column(db.Float, nullable=False)
     
     # Relaciones para acceder fácil: detalle_pedido.producto.nombre
-    pedido = db.relationship('Pedido', backref='detalles_pedido')
+    pedido = db.relationship('Pedido', back_populates='detalles_pedido')
     producto = db.relationship('Producto', backref='detalles_pedido')
 
     def __init__(self, pedido_id, producto_id, cantidad, precio):
