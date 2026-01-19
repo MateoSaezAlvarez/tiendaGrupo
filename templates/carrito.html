@@ -3,40 +3,46 @@
 {% block title %}Carrito{% endblock %}
 
 {% block content %}
-<h1>Mi Carrito</h1>
+<h1>Tu Carrito</h1>
 
 {% if items %}
     <table>
         <thead>
             <tr>
                 <th>Producto</th>
-                <th>Precio (€)</th>
                 <th>Cantidad</th>
-                <th>Subtotal (€)</th>
+                <th>Subtotal</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             {% for item in items %}
-                <tr>
-                    <td>{{ item.producto.nombre }}</td>
-                    <td>{{ item.producto.precio }}</td>
-                    <td>{{ item.cantidad }}</td>
-                    <td>{{ (item.producto.precio * item.cantidad)|round(2) }}</td>
-                    <td>
-                        <a href="{{ url_for('carrito_eliminar', id=item.producto.id) }}">Eliminar</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ item.producto.nombre }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>{{ item.subtotal }}€</td>
+                <td>
+                    <a href="{{ url_for('eliminar_item_carrito', id_prod=item.id_producto) }}">Eliminar</a>
+                </td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <h3>Total: {{ total_global }}€</h3>
+    <p>Total: {{ total_global }}€</p>
 
-    <a href="{{ url_for('carrito_vaciar') }}">Vaciar Carrito</a>
+    <div class="carrito-botones">
+        <a href="{{ url_for('vaciar_carrito') }}">Vaciar Carrito</a>
+
+        <!-- BOTÓN DE COMPRAR -->
+        <form action="{{ url_for('checkout') }}" method="POST" style="display:inline;">
+            <button type="submit">Comprar</button>
+        </form>
+    </div>
+
 {% else %}
-    <p>Tu carrito está vacío.</p>
+    <p>El carrito está vacío.</p>
 {% endif %}
 
-<a href="{{ url_for('index') }}">Seguir comprando</a>
+<p><a href="{{ url_for('index') }}">Volver a la tienda</a></p>
 {% endblock %}
