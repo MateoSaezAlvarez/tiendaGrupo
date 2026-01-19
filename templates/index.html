@@ -21,17 +21,17 @@
                 <p>Precio: {{ producto.precio }}€</p>
                 <p>Stock: {{ producto.stock }}</p>
                 {% if producto.imagen %}
-                    <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" width="150">
+                    <img src="{{ url_for('static', filename='uploads/' ~ producto.imagen) }}" alt="{{ producto.nombre }}" width="150">
                 {% endif %}
                 
                 <div class="botones">
                     <a href="{{ url_for('detalle_producto', id=producto.id) }}">Ver detalle</a>
 
-                    {% if session.get('user_id') %}
-                        | <a href="{{ url_for('carrito_agregar', id=producto.id) }}">Agregar al carrito</a>
+                    {% if current_user.is_authenticated %}
+                        | <a href="{{ url_for('agregar_carrito', id=producto.id) }}">Agregar al carrito</a>
                     {% endif %}
 
-                    {% if session.get('user_role') == 'admin' %}
+                    {% if current_user.is_authenticated and current_user.roles == 'admin' %}
                         | <a href="{{ url_for('editar_producto', id=producto.id) }}">Editar</a>
                         | <a href="{{ url_for('eliminar_producto', id=producto.id) }}">Eliminar</a>
                     {% endif %}

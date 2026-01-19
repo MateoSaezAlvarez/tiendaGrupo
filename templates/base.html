@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Mi Tienda{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
         <ul>
             <li><a href="{{ url_for('index') }}">Inicio</a></li>
             
-            {% if session.get('user_id') %}
-                <li><a href="{{ url_for('carrito_ver') }}">Carrito</a></li>
+            {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('ver_carrito') }}">Carrito</a></li>
 
-                {% if session.get('user_role') == 'admin' %}
-                    <li><a href="{{ url_for('producto_nuevo') }}">Nuevo Producto</a></li>
-                {% endif %}
+            {% if current_user.roles == 'admin' %}
+                <li><a href="{{ url_for('nuevo_producto') }}">Nuevo Producto</a></li>
+            {% endif %}
 
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% else %}
-                <li><a href="{{ url_for('login_ver') }}">Login</a></li>
-                <li><a href="{{ url_for('register_ver') }}">Registro</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('register') }}">Registro</a></li>
             {% endif %}
+
         </ul>
     </nav>
 
