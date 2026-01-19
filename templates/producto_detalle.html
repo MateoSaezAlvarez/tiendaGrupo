@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Producto{% endblock %}
+
+{% block content %}
+<h1>Detalle del Producto</h1>
+
+<div class="producto-detalle">
+    <h2>{{ producto.nombre }}</h2>
+    <p>Precio: {{ producto.precio }}€</p>
+    <p>Stock: {{ producto.stock }}</p>
+    
+    {% if producto.imagen %}
+        <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" width="250">
+    {% endif %}
+
+    <div class="botones">
+        {% if session.get('user_id') %}
+            <a href="{{ url_for('carrito_agregar', id=producto.id) }}">Agregar al carrito</a>
+        {% endif %}
+
+        {% if session.get('user_role') == 'admin' %}
+            | <a href="{{ url_for('editar_producto', id=producto.id) }}">Editar</a>
+            | <a href="{{ url_for('eliminar_producto', id=producto.id) }}">Eliminar</a>
+        {% endif %}
+
+        | <a href="{{ url_for('index') }}">Volver a la tienda</a>
+    </div>
+</div>
+{% endblock %}

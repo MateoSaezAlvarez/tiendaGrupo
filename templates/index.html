@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Página Principal{% endblock %}
+
+{% block content %}
+<h1>Bienvenido a Mi Tienda</h1>
+
+<!-- Buscador -->
+<form action="{{ url_for('index') }}" method="GET" class="form-buscador">
+    <input type="text" name="q" placeholder="Buscar producto..." value="{{ request.args.get('q', '') }}">
+    <button type="submit">Buscar</button>
+    <a href="{{ url_for('index') }}" class="boton-limpiar">Limpiar</a>
+</form>
+
+
+{% if productos %}
+    <div class="productos">
+        {% for producto in productos %}
+            <div class="producto">
+                <h3>{{ producto.nombre }}</h3>
+                <p>Precio: {{ producto.precio }}€</p>
+                <p>Stock: {{ producto.stock }}</p>
+                {% if producto.imagen %}
+                    <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" width="150">
+                {% endif %}
+                
+                <div class="botones">
+                    <a href="{{ url_for('detalle_producto', id=producto.id) }}">Ver detalle</a>
+
+                    {% if session.get('user_id') %}
+                        | <a href="{{ url_for('carrito_agregar', id=producto.id) }}">Agregar al carrito</a>
+                    {% endif %}
+
+                    {% if session.get('user_role') == 'admin' %}
+                        | <a href="{{ url_for('editar_producto', id=producto.id) }}">Editar</a>
+                        | <a href="{{ url_for('eliminar_producto', id=producto.id) }}">Eliminar</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No hay productos disponibles.</p>
+{% endif %}
+{% endblock %}

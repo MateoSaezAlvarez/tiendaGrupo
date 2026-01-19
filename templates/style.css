@@ -1,0 +1,220 @@
+/* Estilos generales ya estaban en base.css */
+body { font-family: Arial, sans-serif; margin:0; padding:0; }
+header { background-color:#333; color:white; padding:10px; }
+nav ul { list-style:none; display:flex; gap:10px; margin:0; padding:0; }
+nav ul li { display:inline; }
+nav ul li a { color:white; text-decoration:none; }
+nav ul li a:hover { text-decoration:underline; }
+
+.flash { padding:10px; margin:10px auto; width:90%; max-width:600px; border-radius:4px; }
+.flash-success { background-color:#d4edda; color:#155724; }
+.flash-error { background-color:#f8d7da; color:#721c24; }
+
+main { padding:20px; min-height:70vh; }
+footer { background-color:#333; color:white; text-align:center; padding:10px; }
+
+/* ===== Estilos para index.html ===== */
+.productos {
+    display: flex;
+    flex-wrap: wrap;
+    gap:20px;
+}
+
+.producto {
+    border:1px solid #ccc;
+    padding:10px;
+    width:200px;
+    text-align:center;
+    border-radius:4px;
+    background-color:#f9f9f9;
+}
+
+.producto img {
+    max-width:100%;
+    height:auto;
+    margin-bottom:10px;
+}
+
+.botones a {
+    text-decoration:none;
+    color: #007bff;
+}
+
+.botones a:hover {
+    text-decoration:underline;
+}
+
+
+/* ===== Estilos para producto_detalle.html ===== */
+.producto-detalle {
+    border:1px solid #ccc;
+    padding:20px;
+    max-width:400px;
+    margin:20px auto;
+    text-align:center;
+    border-radius:4px;
+    background-color:#f9f9f9;
+}
+
+.producto-detalle img {
+    max-width:100%;
+    height:auto;
+    margin-bottom:10px;
+}
+
+.producto-detalle .botones a {
+    display:inline-block;
+    margin:5px;
+    text-decoration:none;
+    color:#007bff;
+}
+
+.producto-detalle .botones a:hover {
+    text-decoration:underline;
+}
+
+/* ==== Estilos para producto_form.html ==== */
+form {
+    max-width:400px;
+    margin:20px auto;
+    padding:15px;
+    border:1px solid #ccc;
+    border-radius:4px;
+    background-color:#f9f9f9;
+}
+
+form label {
+    font-weight:bold;
+}
+
+form input {
+    width:100%;
+    padding:5px;
+    margin-bottom:10px;
+    border:1px solid #ccc;
+    border-radius:3px;
+}
+
+form button {
+    padding:8px 12px;
+    background-color:#007bff;
+    color:white;
+    border:none;
+    border-radius:3px;
+    cursor:pointer;
+}
+
+form button:hover {
+    background-color:#0056b3;
+}
+
+form a {
+    margin-left:10px;
+    text-decoration:none;
+    color:#007bff;
+}
+
+form a:hover {
+    text-decoration:underline;
+}
+
+form img {
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+
+/* ==== Estilos para carrito.html ==== */
+table {
+    width:90%;
+    max-width:800px;
+    margin:20px auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border:1px solid #ccc;
+}
+
+th, td {
+    padding:8px;
+    text-align:center;
+}
+
+th {
+    background-color:#f2f2f2;
+}
+
+a {
+    color:#007bff;
+    text-decoration:none;
+}
+
+a:hover {
+    text-decoration:underline;
+}
+
+h3 {
+    text-align:center;
+    margin-top:20px;
+}
+
+
+/* ==== Estilos para login.html y register.html ==== */
+form {
+    max-width:400px;
+    margin:20px auto;
+    padding:15px;
+    border:1px solid #ccc;
+    border-radius:4px;
+    background-color:#f9f9f9;
+}
+
+form label { font-weight:bold; }
+form input { width:100%; padding:5px; margin-bottom:10px; border:1px solid #ccc; border-radius:3px; }
+form button {
+    padding:8px 12px;
+    background-color:#007bff;
+    color:white;
+    border:none;
+    border-radius:3px;
+    cursor:pointer;
+}
+form button:hover { background-color:#0056b3; }
+form a { margin-left:10px; text-decoration:none; color:#007bff; }
+form a:hover { text-decoration:underline; }
+
+/* === Estilos para el buscador === */
+/* Estilo del buscador */
+.form-buscador {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-buscador input[type="text"] {
+    padding: 5px;
+    font-size: 14px;
+}
+
+.form-buscador button {
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.boton-limpiar {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #ccc;
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 3px;
+}
+
+.boton-limpiar:hover {
+    background-color: #aaa;
+}
+
